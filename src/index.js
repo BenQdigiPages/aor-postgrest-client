@@ -28,7 +28,7 @@ export default (apiUrl, httpClient = fetchJson) => {
     const convertFilters = (filters) => {
         let rest = {};
 
-        Object.keys(filters).map(function (key) {
+        Object.keys(filters).map(function (key) { // TODO: evaluate if there are better approaches than using map() as a for-each-loop
             switch (typeof filters[key]) {
                 case 'string':
                     rest[key]='ilike.*' + filters[key].replace(/:/,'') + '*';
@@ -50,6 +50,7 @@ export default (apiUrl, httpClient = fetchJson) => {
                     rest[key]='ilike.*' + filters[key].toString().replace(/:/,'') + '*';
                     break;
             }
+            return rest[key];
         });
         return rest;
     }
@@ -75,7 +76,6 @@ export default (apiUrl, httpClient = fetchJson) => {
 			options.headers.set('Range-Unit','items');
 			options.headers.set('Range',((page-1)*perPage) + '-' + ((page * perPage) -1)   );
 			options.headers.set('Prefer','count=exact');
-			const pf = params.filter;
             let query = {
                 order: field + '.' +  order.toLowerCase(),
             };
@@ -143,9 +143,9 @@ export default (apiUrl, httpClient = fetchJson) => {
                 total: parseInt(headers.get('content-range').split('/').pop(), 10) || maxInPage,
             };
         case CREATE:
-            return { ...params.data, id: json.id };
+            return { data: { ...params.data, id: json.id } };
         case UPDATE:
-            return { ...params.data, id: params.id };
+            return { data: { ...params.data, id: params.id } };
         default:
             return { data: json };
         }
