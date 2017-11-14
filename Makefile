@@ -5,14 +5,14 @@ help:
 
 lib: build
 
-clean: lib ## delete transpiled ES6 files
-	@rm -rf lib
+clean: ## delete transpiled ES6 files
+	@npm run-script clean
 
 install: package.json ## install dependencies
 	@npm install
 
 build: ## compile ES6 files to JS
-	@npm run-script build
+	@npm pack
 
-publish: lib ## build first, then publish
-	@npm run-script publish
+publish: ## build first, then publish
+	@npm publish

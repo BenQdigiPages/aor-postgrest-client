@@ -4,8 +4,7 @@
   "description": "A postgrest client for admin-on-rest",
   "main": "lib/index.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production ./node_modules/.bin/babel ./src -d lib --ignore '*.spec.js'",
-    "publish": "npm run-script build && npm publish",
+    "prepublish": "cross-env NODE_ENV=production ./node_modules/.bin/babel ./src -d lib --ignore '*.spec.js'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf lib"
   },
