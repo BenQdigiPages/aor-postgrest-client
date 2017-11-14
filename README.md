@@ -26,6 +26,13 @@ const App = () => (
 export default App;
 ```
 
+## Scripts
+
+| command                  | Description                                                   |
+| ------------------------ | ------------------------------------------------------------- |
+| `npm run-script build`   | Build process to generate main target 'lib'                   |
+| `npm run-script publish` | Shortcut that will trigger build before running `npm publish` |
+
 ## License
 
 This library is licensed under the [MIT Licence](LICENSE), and sponsored by [tomberek](https://tomberek.info).
